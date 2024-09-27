@@ -1,0 +1,166 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5517,        158]
+NotebookOptionsPosition[      5159,        144]
+NotebookOutlinePosition[      5563,        160]
+CellTagsIndexPosition[      5520,        157]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Aim", " ", "of", " ", "this", " ", 
+     RowBox[{"code", ":", " ", 
+      RowBox[{
+      "study", " ", "the", " ", "theta", " ", "integral", " ", "and", " ", 
+       "plot", " ", 
+       RowBox[{"(", 
+        RowBox[{"with", " ", "the", " ", "correct", " ", "indeces"}], ")"}], 
+       " ", "the", " ", "result", " ", "for", " ", "m"}]}]}], ",", " ", "n"}],
+    "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Legendre", " ", "associated", " ", "polyomial", " ", "function"}],
+    "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"LGP", "[", 
+     RowBox[{"j_", ",", "m_", ",", "\[CapitalTheta]_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"Sqrt", "[", 
+      RowBox[{
+       FractionBox[
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"2", " ", "j"}], "+", "1"}], ")"}], " "}], 
+        RowBox[{"4", "\[Pi]"}]], 
+       FractionBox[
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"j", "-", "m"}], ")"}], "!"}], 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"j", "+", "m"}], ")"}], "!"}]]}], "]"}], " ", 
+     RowBox[{"LegendreP", "[", 
+      RowBox[{"j", ",", "m", ",", 
+       RowBox[{"Cos", "[", "\[CapitalTheta]", "]"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Calcolo", " ", "della", " ", "matrice", " ", "di", " ", "integrali", " ",
+      "in", " ", "theta"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"tttTheta", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"NIntegrate", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"LGP", "[", 
+             RowBox[{"jj", ",", "mm", ",", "\[Theta]"}], "]"}], 
+            RowBox[{"LGP", "[", 
+             RowBox[{"jj", ",", "nn", ",", "\[Theta]"}], "]"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{"\[Theta]", ",", "0", ",", "\[Pi]"}], "}"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"mm", ",", 
+           RowBox[{"-", "jj"}], ",", "jj"}], "}"}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"nn", ",", 
+         RowBox[{"-", "jj"}], ",", "jj"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"tttTheta", "=", 
+     RowBox[{"tttTheta", "//", "Chop"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"MatrixPlot", "[", 
+    RowBox[{"tttTheta", ",", "\[IndentingNewLine]", 
+     RowBox[{"ColorFunction", "->", "\"\<Rainbow\>\""}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"PlotLegends", "->", 
+      RowBox[{"BarLegend", "[", "\"\<Rainbow\>\"", "]"}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"FrameTicks", "->", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Reverse", "[", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"i", ",", 
+             RowBox[{"i", "-", "jj", "-", "1"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", 
+             RowBox[{
+              RowBox[{"2", "*", "jj"}], "+", "1"}], ",", "4"}], "}"}]}], 
+          "]"}], "]"}], ",", 
+        RowBox[{"Reverse", "[", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"i", ",", 
+             RowBox[{"i", "-", "jj", "-", "1"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", 
+             RowBox[{
+              RowBox[{"2", "*", "jj"}], "+", "1"}], ",", "4"}], "}"}]}], 
+          "]"}], " ", "]"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"FrameLabel", "->", 
+      RowBox[{"{", 
+       RowBox[{"\"\<n\>\"", ",", "\"\<m\>\""}], "}"}]}], ",", 
+     RowBox[{"FrameTicksStyle", "->", 
+      RowBox[{"Directive", "[", 
+       RowBox[{"FontSize", "->", "12"}], "]"}]}], ",", " ", 
+     RowBox[{"DataReversed", "->", 
+      RowBox[{"{", 
+       RowBox[{"True", ",", " ", "False"}], "}"}]}]}], "\[IndentingNewLine]", 
+    "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Salvataggio", " ", "del", " ", "MatrixPlot", " ", "e", " ", "della", " ",
+      "legenda", " ", "in", " ", "un", " ", "file", " ", "PDF"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Export", "[", 
+    RowBox[{"\"\<MatrixPlotWithLegend.pdf\>\"", ",", "matrixPlot"}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.9328889068563213`*^9, 
+  3.932888942089813*^9}},ExpressionUUID->"11e7fea2-f30b-49ee-b93a-\
+4a7d55ffa025"]
+},
+WindowSize->{1141.2, 579.6},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (January 30, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"6d4670a4-a99a-4cea-9092-277a0386f6a4"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 4597, 122, 415, "Input",ExpressionUUID->"11e7fea2-f30b-49ee-b93a-4a7d55ffa025"]
+}
+]
+*)
+

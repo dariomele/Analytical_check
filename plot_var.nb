@@ -1,0 +1,659 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     25055,        651]
+NotebookOptionsPosition[     24149,        629]
+NotebookOutlinePosition[     24583,        646]
+CellTagsIndexPosition[     24540,        643]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Definizione", " ", "della", " ", "directory", " ", "e", " ", "del", " ", 
+    "formato", " ", "dei", " ", "file"}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "directory", "=", 
+     "\"\<C:\\\\Users\\\\meleg\\\\OneDrive\\\\Desktop\\\\Mathematica\\\\\
+results_TrAmu_complete\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"files", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{"directory", ",", 
+          RowBox[{"\"\<results_TrAmu_j=\>\"", "<>", 
+           RowBox[{"ToString", "[", "jj", "]"}], "<>", "\"\<.txt\>\""}]}], 
+         "}"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"jj", ",", "2", ",", "14", ",", "2"}], "}"}]}], "]"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Funzione", " ", "per", " ", "calcolare", " ", "la", " ", "somma", " ", 
+     "richiesta", " ", "per", " ", "ogni", " ", "jj"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"calcolaSomma", "[", "jj_", "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"file", ",", "data", ",", "ultimiTre", ",", "somma"}], "}"}], 
+       ",", 
+       RowBox[{"(*", 
+        RowBox[{
+        "Costruisce", " ", "il", " ", "nome", " ", "del", " ", "file"}], 
+        "*)"}], 
+       RowBox[{
+        RowBox[{"file", "=", 
+         RowBox[{"FileNameJoin", "[", 
+          RowBox[{"{", 
+           RowBox[{"directory", ",", 
+            RowBox[{"\"\<results_TrAmu_j=\>\"", "<>", 
+             RowBox[{"ToString", "[", "jj", "]"}], "<>", "\"\<.txt\>\""}]}], 
+           "}"}], "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+         "Importa", " ", "i", " ", "dati", " ", "dal", " ", "file", " ", 
+          "per", " ", "jj"}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"data", "=", 
+         RowBox[{"Import", "[", 
+          RowBox[{"file", ",", "\"\<Table\>\""}], "]"}]}], ";", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"Verifica", " ", "se", " ", 
+          RowBox[{"l", "'"}], "importazione", " ", "ha", " ", "avuto", " ", 
+          "successo", " ", "e", " ", "se", " ", "ci", " ", "sono", " ", 
+          "almeno", " ", "3", " ", "righe", " ", "di", " ", "dati"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"Head", "[", "data", "]"}], "===", "List"}], "&&", 
+           RowBox[{
+            RowBox[{"Length", "[", "data", "]"}], ">=", "3"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+           "Estrai", " ", "gli", " ", "ultimi", " ", "tre", " ", "valori", 
+            " ", "di", " ", "J", " ", "e", " ", "TrValue"}], "*)"}], 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"ultimiTre", "=", 
+            RowBox[{"Take", "[", 
+             RowBox[{"data", ",", 
+              RowBox[{"-", "3"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{"Calcola", " ", "la", " ", "somma", " ", 
+             RowBox[{"TrValue", "/", "J"}], " ", "per", " ", "gli", " ", 
+             "ultimi", " ", "tre", " ", "valori"}], "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{"somma", "=", 
+            RowBox[{"Plus", "@@", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"ultimiTre", "[", 
+                RowBox[{"[", 
+                 RowBox[{"All", ",", "2"}], "]"}], "]"}], "/", 
+               RowBox[{"ultimiTre", "[", 
+                RowBox[{"[", 
+                 RowBox[{"All", ",", "1"}], "]"}], "]"}]}], ")"}]}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{"Restituisci", " ", "la", " ", "somma"}], "*)"}], 
+           "\[IndentingNewLine]", "somma"}], ",", "\[IndentingNewLine]", 
+          "Null"}], "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
+      "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Calcolo", " ", "della", " ", "somma", " ", "per", " ", "ciascun", " ", 
+     "jj"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"resultFunction", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Log2", "[", "jj", "]"}], "+", "1"}], ",", 
+         RowBox[{"calcolaSomma", "[", "jj", "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"jj", ",", "2", ",", "14", ",", "2"}], "}"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", "resultFunction", "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Rimuove", " ", "eventuali", " ", "risultati", " ", "Null"}], 
+    "*)"}], "\n", 
+   RowBox[{"resultFunction", "=", 
+    RowBox[{"DeleteCases", "[", 
+     RowBox[{"resultFunction", ",", 
+      RowBox[{"{", 
+       RowBox[{"_", ",", "Null"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Plot", " ", "della", " ", "somma", " ", "calcolata", " ", "in", " ", 
+     "funzione", " ", "di", " ", "jj"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{"resultFunction", ",", 
+     RowBox[{"PlotMarkers", "->", "Automatic"}], ",", 
+     RowBox[{"AxesLabel", "->", 
+      RowBox[{"{", 
+       RowBox[{"\"\<jj\>\"", ",", "\"\<Somma (TrValue/J)\>\""}], "}"}]}], ",", 
+     RowBox[{
+     "PlotLabel", "->", "\"\<Somma (TrValue/J) in funzione di jj\>\""}]}], 
+    "]"}], "\n"}]}]], "Input",
+ CellChangeTimes->{{3.9336558665518217`*^9, 3.9336558665518217`*^9}, {
+   3.933655992820371*^9, 3.9336559966618137`*^9}, {3.933656038750611*^9, 
+   3.9336560648458157`*^9}, 3.9336563131280994`*^9, {3.933656371567396*^9, 
+   3.933656373169155*^9}, {3.9336564962995625`*^9, 3.9336565086498957`*^9}, {
+   3.93365661703341*^9, 3.933656623709751*^9}, {3.933656694503499*^9, 
+   3.9336567245071115`*^9}, {3.933656904651347*^9, 3.933656934393878*^9}, {
+   3.9336569758705835`*^9, 3.9336569934328213`*^9}, {3.933658590613632*^9, 
+   3.9336586190520196`*^9}, {3.9336788966649055`*^9, 
+   3.9336788968404093`*^9}, {3.9336790046160383`*^9, 3.933679005130227*^9}},
+ CellLabel->
+  "In[249]:=",ExpressionUUID->"1c3c67cf-f1ce-490f-8c14-302ba28b2b88"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"2", ",", "1.6086712271476025`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", 
+     RowBox[{"-", "3.304135342411554`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"1", "+", 
+      FractionBox[
+       RowBox[{"Log", "[", "6", "]"}], 
+       RowBox[{"Log", "[", "2", "]"}]]}], ",", 
+     RowBox[{"-", "4.219652453428668`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", 
+     RowBox[{"-", "2.488347678420671`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"1", "+", 
+      FractionBox[
+       RowBox[{"Log", "[", "10", "]"}], 
+       RowBox[{"Log", "[", "2", "]"}]]}], ",", 
+     RowBox[{"-", "1.416595882729379`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"1", "+", 
+      FractionBox[
+       RowBox[{"Log", "[", "12", "]"}], 
+       RowBox[{"Log", "[", "2", "]"}]]}], ",", 
+     RowBox[{"-", "1.416595882729379`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"1", "+", 
+      FractionBox[
+       RowBox[{"Log", "[", "14", "]"}], 
+       RowBox[{"Log", "[", "2", "]"}]]}], ",", 
+     RowBox[{"-", "1.272973923960334`"}]}], "}"}]}], "}"}]], "Print",
+ CellChangeTimes->{{3.9336567160171576`*^9, 3.9336567247894635`*^9}, {
+   3.9336569060664434`*^9, 3.933656934848496*^9}, {3.9336569792860603`*^9, 
+   3.9336569939830527`*^9}, 3.9336595190226502`*^9, 3.9336788975311575`*^9, 
+   3.9336790053299623`*^9},
+ CellLabel->
+  "During evaluation of \
+In[249]:=",ExpressionUUID->"6dbc84b2-91eb-43ca-adc4-48d7cde3c897"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"2", ",", "1.6086712271476025`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", 
+     RowBox[{"-", "3.304135342411554`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"1", "+", 
+      FractionBox[
+       RowBox[{"Log", "[", "6", "]"}], 
+       RowBox[{"Log", "[", "2", "]"}]]}], ",", 
+     RowBox[{"-", "4.219652453428668`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", 
+     RowBox[{"-", "2.488347678420671`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"1", "+", 
+      FractionBox[
+       RowBox[{"Log", "[", "10", "]"}], 
+       RowBox[{"Log", "[", "2", "]"}]]}], ",", 
+     RowBox[{"-", "1.416595882729379`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"1", "+", 
+      FractionBox[
+       RowBox[{"Log", "[", "12", "]"}], 
+       RowBox[{"Log", "[", "2", "]"}]]}], ",", 
+     RowBox[{"-", "1.416595882729379`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"1", "+", 
+      FractionBox[
+       RowBox[{"Log", "[", "14", "]"}], 
+       RowBox[{"Log", "[", "2", "]"}]]}], ",", 
+     RowBox[{"-", "1.272973923960334`"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.9336559816628113`*^9, 3.933655997855865*^9}, 
+   3.933656315766868*^9, 3.933656374393855*^9, {3.933656499870425*^9, 
+   3.9336565094355526`*^9}, {3.933656617643504*^9, 3.9336567247894635`*^9}, {
+   3.9336569060664434`*^9, 3.933656934848496*^9}, {3.9336569792860603`*^9, 
+   3.9336569939986734`*^9}, 3.933659519023656*^9, 3.9336788975311575`*^9, 
+   3.933679005335065*^9},
+ CellLabel->
+  "Out[254]=",ExpressionUUID->"5dbdd60f-e17c-4771-88f9-994aa6636ae3"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{{}, {}, 
+     {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+       NCache[
+        Rational[7, 360], 0.019444444444444445`]], AbsoluteThickness[1.6], 
+      LineBox[{{2., 1.6086712271476025`}, {3., -3.304135342411554}, {
+       3.584962500721156, -4.219652453428668}, {4., -2.488347678420671}, {
+       4.321928094887363, -1.416595882729379}, {
+       4.584962500721156, -1.416595882729379}, {
+       4.807354922057604, -1.272973923960334}}]}}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+      NCache[
+       Rational[7, 360], 0.019444444444444445`]], AbsoluteThickness[1.6], 
+     GeometricTransformationBox[InsetBox[
+       FormBox[
+        StyleBox[
+         GraphicsBox[
+          {EdgeForm[None], DiskBox[{0, 0}]}],
+         StripOnInput->False,
+         GraphicsBoxOptions->{DefaultBaseStyle->Directive[
+           PointSize[
+            Rational[7, 360]], 
+           RGBColor[0.368417, 0.506779, 0.709798], 
+           AbsoluteThickness[1.6]]}],
+        TraditionalForm], {0., 0.}, Automatic, Offset[6.272]], {{{2., 
+      1.6086712271476025`}}, {{3., -3.304135342411554}}, {{
+      3.584962500721156, -4.219652453428668}}, {{4., -2.488347678420671}}, {{
+      4.321928094887363, -1.416595882729379}}, {{
+      4.584962500721156, -1.416595882729379}}, {{
+      4.807354922057604, -1.272973923960334}}}]}}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{
+    FormBox[
+     TagBox["\"jj\"", HoldForm], TraditionalForm], 
+    FormBox[
+     TagBox["\"Somma (TrValue/J)\"", HoldForm], TraditionalForm]},
+  AxesOrigin->{1.9415134391238045`, 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  Method->{
+   "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+    "DefaultGraphicsInteraction" -> {
+     "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+      "Effects" -> {
+       "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+        "Droplines" -> {
+         "freeformCursorMode" -> True, 
+          "placement" -> {"x" -> "All", "y" -> "None"}}}}, "DefaultMeshStyle" -> 
+    AbsolutePointSize[6], "DefaultPlotStyle" -> {
+      Directive[
+       RGBColor[0.368417, 0.506779, 0.709798], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.880722, 0.611041, 0.142051], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.560181, 0.691569, 0.194885], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.922526, 0.385626, 0.209179], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.528488, 0.470624, 0.701351], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.772079, 0.431554, 0.102387], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.363898, 0.618501, 0.782349], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[1, 0.75, 0], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.647624, 0.37816, 0.614037], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.571589, 0.586483, 0.], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.915, 0.3325, 0.2125], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.40082222609352647`, 0.5220066643438841, 0.85], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.9728288904374106, 0.621644452187053, 0.07336199581899142], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.736782672705901, 0.358, 0.5030266573755369], 
+       AbsoluteThickness[1.6]], 
+      Directive[
+       RGBColor[0.28026441037696703`, 0.715, 0.4292089322474965], 
+       AbsoluteThickness[1.6]]}, "DomainPadding" -> Scaled[0.02], 
+    "RangePadding" -> Scaled[0.05], "OptimizePlotMarkers" -> True, 
+    "OptimizePlotMarkers" -> True, 
+    "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        Identity[
+         Part[#, 1]], 
+        Identity[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        Identity[
+         Part[#, 1]], 
+        Identity[
+         Part[#, 2]]}& )}},
+  PlotLabel->FormBox[
+   "\"Somma (TrValue/J) in funzione di jj\"", TraditionalForm],
+  PlotRange->{{1.9415134391238045`, 4.807354922057604}, {-4.219652453428668, 
+   1.6086712271476025`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.9336559816628113`*^9, 3.933655997855865*^9}, 
+   3.933656315766868*^9, 3.933656374393855*^9, {3.933656499870425*^9, 
+   3.9336565094355526`*^9}, {3.933656617643504*^9, 3.9336567247894635`*^9}, {
+   3.9336569060664434`*^9, 3.933656934848496*^9}, {3.9336569792860603`*^9, 
+   3.9336569939986734`*^9}, 3.933659519023656*^9, 3.9336788975311575`*^9, 
+   3.9336790053701353`*^9},
+ CellLabel->
+  "Out[255]=",ExpressionUUID->"d3c8a2df-a141-4bde-a8c3-bc712d1f19e5"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  GraphicsBox[{{}, {{{}, {}, 
+      {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+        NCache[
+         Rational[7, 360], 0.019444444444444445`]], AbsoluteThickness[1.6], 
+       LineBox[{{2., -0.5638633333333334}, {3., 0.7329792933983245}, {
+        3.584962500721156, -2.619479315909884}, {4., 0.6475670419418075}, {
+        4.321928094887363, -0.21970420598627344`}, {
+        4.584962500721156, -1.3386506450329911`}, {4.807354922057604, 
+        0.4275898681850013}, {5., 0.14362403125}}]}}, 
+     {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+       NCache[
+        Rational[7, 360], 0.019444444444444445`]], AbsoluteThickness[1.6], 
+      GeometricTransformationBox[InsetBox[
+        FormBox[
+         StyleBox[
+          GraphicsBox[
+           {EdgeForm[None], DiskBox[{0, 0}]}],
+          StripOnInput->False,
+          GraphicsBoxOptions->{DefaultBaseStyle->Directive[
+            PointSize[
+             Rational[7, 360]], 
+            RGBColor[0.368417, 0.506779, 0.709798], 
+            AbsoluteThickness[1.6]]}],
+         TraditionalForm], {0., 0.}, Automatic, Offset[6.272]], {{{
+       2., -0.5638633333333334}}, {{3., 0.7329792933983245}}, {{
+       3.584962500721156, -2.619479315909884}}, {{4., 0.6475670419418075}}, {{
+       4.321928094887363, -0.21970420598627344`}}, {{
+       4.584962500721156, -1.3386506450329911`}}, {{4.807354922057604, 
+       0.4275898681850013}}, {{5., 0.14362403125}}}]}}, {{}, {}}},
+   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+   Axes->{True, True},
+   AxesLabel->{
+     FormBox[
+      TagBox["\"jj\"", HoldForm], TraditionalForm], 
+     FormBox[
+      TagBox["\"Somma (TrValue/J)\"", HoldForm], TraditionalForm]},
+   AxesOrigin->{1.9375000000000044`, 0},
+   DisplayFunction->Identity,
+   Frame->{{False, False}, {False, False}},
+   FrameLabel->{{None, None}, {None, None}},
+   FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+   GridLines->{None, None},
+   GridLinesStyle->Directive[
+     GrayLevel[0.5, 0.4]],
+   ImageSize->{426.66666666666504`, Automatic},
+   Method->{
+    "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+     "DefaultGraphicsInteraction" -> {
+      "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+       "Effects" -> {
+        "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+         "Droplines" -> {
+          "freeformCursorMode" -> True, 
+           "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+     "DefaultMeshStyle" -> AbsolutePointSize[6], "DefaultPlotStyle" -> {
+       Directive[
+        RGBColor[0.368417, 0.506779, 0.709798], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[0.880722, 0.611041, 0.142051], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[0.560181, 0.691569, 0.194885], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[0.922526, 0.385626, 0.209179], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[0.528488, 0.470624, 0.701351], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[0.772079, 0.431554, 0.102387], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[0.363898, 0.618501, 0.782349], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[1, 0.75, 0], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[0.647624, 0.37816, 0.614037], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[0.571589, 0.586483, 0.], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[0.915, 0.3325, 0.2125], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[0.40082222609352647`, 0.5220066643438841, 0.85], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[0.9728288904374106, 0.621644452187053, 0.07336199581899142], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[0.736782672705901, 0.358, 0.5030266573755369], 
+        AbsoluteThickness[1.6]], 
+       Directive[
+        RGBColor[0.28026441037696703`, 0.715, 0.4292089322474965], 
+        AbsoluteThickness[1.6]]}, "DomainPadding" -> Scaled[0.02], 
+     "RangePadding" -> Scaled[0.05], "OptimizePlotMarkers" -> True, 
+     "OptimizePlotMarkers" -> True, 
+     "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+         Identity[
+          Part[#, 1]], 
+         Identity[
+          Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+         Identity[
+          Part[#, 1]], 
+         Identity[
+          Part[#, 2]]}& )}},
+   PlotLabel->FormBox[
+    "\"Somma (TrValue/J) in funzione di jj\"", TraditionalForm],
+   PlotRange->{{1.9375000000000044`, 5.}, {-2.619479315909884, 
+    0.7329792933983245}},
+   PlotRangeClipping->True,
+   PlotRangePadding->{{
+      Scaled[0.02], 
+      Scaled[0.02]}, {
+      Scaled[0.05], 
+      Scaled[0.05]}},
+   Ticks->{Automatic, Automatic}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.933657035636565*^9, 
+  3.933657035636565*^9}},ExpressionUUID->"44615958-3c91-411e-beb7-\
+5d9ab4f66a4f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Funzione", " ", "per", " ", "calcolare", " ", "i", " ", "valori", " ", 
+    "di", " ", "timing", " ", "per", " ", "ogni", " ", "jj"}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"calcolaTiming", "[", "jj_", "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"file", ",", "data", ",", "timingValue"}], "}"}], ",", 
+       RowBox[{"(*", 
+        RowBox[{
+        "Costruisce", " ", "il", " ", "nome", " ", "del", " ", "file"}], 
+        "*)"}], 
+       RowBox[{
+        RowBox[{"file", "=", 
+         RowBox[{"FileNameJoin", "[", 
+          RowBox[{"{", 
+           RowBox[{"directory", ",", 
+            RowBox[{"\"\<results_TrAmu_j=\>\"", "<>", 
+             RowBox[{"ToString", "[", "jj", "]"}], "<>", "\"\<.txt\>\""}]}], 
+           "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+         "Importa", " ", "i", " ", "dati", " ", "dal", " ", "file", " ", 
+          "per", " ", "jj"}], "*)"}], 
+        RowBox[{"data", "=", 
+         RowBox[{"Import", "[", 
+          RowBox[{"file", ",", "\"\<Table\>\""}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"Verifica", " ", "se", " ", 
+          RowBox[{"l", "'"}], "importazione", " ", "ha", " ", "avuto", " ", 
+          "successo"}], "*)"}], 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Head", "[", "data", "]"}], "===", "List"}], ",", 
+          RowBox[{"(*", 
+           RowBox[{
+           "Estrai", " ", "il", " ", "valore", " ", "di", " ", "Timing"}], 
+           "*)"}], 
+          RowBox[{
+           RowBox[{"timingValue", "=", 
+            RowBox[{"data", "[", 
+             RowBox[{"[", 
+              RowBox[{"2", ",", "2"}], "]"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{
+            "Restituisci", " ", "il", " ", "valore", " ", "di", " ", 
+             "Timing"}], "*)"}], "timingValue"}], ",", "Null"}], "]"}]}]}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Calcolo", " ", "del", " ", "timing", " ", "per", " ", "ciascun", " ", 
+     "jj"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"timingFunction", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"jj", ",", 
+         RowBox[{"calcolaTiming", "[", "jj", "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"jj", ",", "2", ",", "14", ",", "2"}], "}"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Rimuove", " ", "eventuali", " ", "risultati", " ", "Null"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"timingFunction", "=", 
+     RowBox[{"DeleteCases", "[", 
+      RowBox[{"timingFunction", ",", 
+       RowBox[{"{", 
+        RowBox[{"_", ",", "Null"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Plot", " ", "del", " ", "timing", " ", "in", " ", "funzione", " ", "di", 
+     " ", "jj"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{"timingFunction", ",", 
+     RowBox[{"PlotMarkers", "->", "Automatic"}], ",", 
+     RowBox[{"AxesLabel", "->", 
+      RowBox[{"{", 
+       RowBox[{"\"\<j\>\"", ",", "\"\<Timing\>\""}], "}"}]}], ",", 
+     RowBox[{"PlotLabel", "->", "\"\<Timing in funzione di j\>\""}]}], "]"}], 
+   "\n"}]}]], "Input",
+ CellChangeTimes->{{3.9336791417905874`*^9, 
+  3.9336791417905874`*^9}},ExpressionUUID->"4ac705ca-c25c-4de6-ae5d-\
+bce92feada04"]
+},
+WindowSize->{1141.2, 568.8},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>0.9 Inherited,
+FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (January 30, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"4746c3a1-a4bb-4ffb-9901-946ca841d468"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 6467, 153, 575, "Input",ExpressionUUID->"1c3c67cf-f1ce-490f-8c14-302ba28b2b88"],
+Cell[7050, 177, 1556, 45, 38, "Print",ExpressionUUID->"6dbc84b2-91eb-43ca-adc4-48d7cde3c897"],
+Cell[8609, 224, 1676, 46, 47, "Output",ExpressionUUID->"5dbdd60f-e17c-4771-88f9-994aa6636ae3"],
+Cell[10288, 272, 5164, 129, 217, "Output",ExpressionUUID->"d3c8a2df-a141-4bde-a8c3-bc712d1f19e5"]
+}, Open  ]],
+Cell[15467, 404, 5052, 126, 282, "Input",ExpressionUUID->"44615958-3c91-411e-beb7-5d9ab4f66a4f"],
+Cell[20522, 532, 3623, 95, 284, "Input",ExpressionUUID->"4ac705ca-c25c-4de6-ae5d-bce92feada04"]
+}
+]
+*)
+
